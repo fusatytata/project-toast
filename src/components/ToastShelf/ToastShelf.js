@@ -1,19 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import Toast from '../Toast';
-import styles from './ToastShelf.module.css';
+import Toast from "../Toast";
+import styles from "./ToastShelf.module.css";
 
-function ToastShelf() {
-  return (
-    <ol className={styles.wrapper}>
-      <li className={styles.toastWrapper}>
-        <Toast variant="notice">Example notice toast</Toast>
-      </li>
-      <li className={styles.toastWrapper}>
-        <Toast variant="error">Example error toast</Toast>
-      </li>
-    </ol>
-  );
+function ToastShelf({toasts}) {
+    return ( 
+            <ol className={styles.wrapper}>
+            {toasts.map((toast) => 
+                (<li key={toast.id} className={styles.toastWrapper}>
+                    <Toast variant={toast.variant}>{toast.message}</Toast>
+                </li>) /* Proč jsou za "toast.map((toast)=>" kulaté závorky a ne složené?? */
+            )}
+        </ol>
+    );
 }
 
 export default ToastShelf;
