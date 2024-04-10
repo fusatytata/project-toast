@@ -25,7 +25,9 @@ function ToastPlayground() {
     const [message, setMessage] = React.useState("");
     const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
 
-    function handleCreateToast(){
+    function handleCreateToast(event){
+        event.preventDefault();
+
         const nextToasts = [
             ...toasts,
          {
@@ -35,11 +37,17 @@ function ToastPlayground() {
          }
         ];
         setToasts(nextToasts);
+
+        setMessage('');
+        setVariant(VARIANT_OPTIONS[0]);
     }
 
-    function handleDissmis() {
-  /*       setIsRendered(false) */
-    }
+    function handleDissmis(id) {
+        const nextToast = toasts.filter(toast => {
+            return toast.id !== id
+        })
+        setToasts(nextToast);
+    }   
 
     return (
         <div className={styles.wrapper}>
@@ -49,10 +57,12 @@ function ToastPlayground() {
             </header>
 
             <ToastShelf 
-            toasts={toasts} 
+            toasts={toasts} handleDissmis={handleDissmis}
             />
 
-            <div className={styles.controlsWrapper}>
+            <form 
+            className={styles.controlsWrapper}
+            onSubmit={handleCreateToast}>
                 <div className={styles.row}>
                     <label htmlFor="message" className={styles.label} style={{ alignSelf: "baseline" }}>
                         Message
@@ -98,13 +108,12 @@ function ToastPlayground() {
                     <div className={styles.label} />
                     <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
                         <Button
-                            onClick={handleCreateToast}
                         >
                             Pop Toast!
                         </Button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     );
 }
