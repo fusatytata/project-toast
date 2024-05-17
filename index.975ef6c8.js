@@ -27255,7 +27255,7 @@ function ToastPlayground() {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                         alt: "Cute toast mascot",
-                        src: "/toast.png"
+                        src: "toast.png"
                     }, void 0, false, {
                         fileName: "src/components/ToastPlayground/ToastPlayground.js",
                         lineNumber: 39,
